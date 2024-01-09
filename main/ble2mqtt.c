@@ -340,7 +340,7 @@ static void ble_on_broadcaster_discovered(mac_addr_t mac, uint8_t *adv_data,
 {
     char *mac_str = strdup(mactoa(mac));
     char rssi_str[6];
-    ESP_LOGI(TAG, "Discovered %s broadcaster", ops->name);
+    ESP_LOGI(TAG, "Discovered %s broadcaster: " MAC_FMT, ops->name, MAC_PARAM(mac));
 
     ble_on_broadcaster_metadata("Type", ops->name, mac_str);
     sprintf(rssi_str, "%d", rssi);
@@ -711,7 +711,7 @@ static int start_ble2mqtt_task(void)
     }
 
 
-    hb_timer = xTimerCreate("heartbeat", pdMS_TO_TICKS(60 * 1000), pdTRUE,
+    hb_timer = xTimerCreate("heartbeat", pdMS_TO_TICKS(10 * 1000), pdTRUE,
         NULL, heartbeat_timer_cb);
     xTimerStart(hb_timer, 0);
 
@@ -921,6 +921,7 @@ void app_main()
     ESP_ERROR_CHECK(ret);
 
     ESP_LOGI(TAG, "Version: %s", BLE2MQTT_VER);
+    esp_log_level_set(TAG, ESP_LOG_DEBUG);
 
     /* Init configuration */
     config_failed = config_initialize();
@@ -975,8 +976,8 @@ void app_main()
     ble_set_on_passkey_requested_cb(ble_on_passkey_requested);
 
     /* Init web server */
-    ESP_ERROR_CHECK(httpd_initialize());
-    httpd_set_on_ota_completed_cb(_ota_on_completed);
+//    ESP_ERROR_CHECK(httpd_initialize());
+//    httpd_set_on_ota_completed_cb(_ota_on_completed);
 
     /* Start BLE2MQTT task */
     ESP_ERROR_CHECK(start_ble2mqtt_task());
