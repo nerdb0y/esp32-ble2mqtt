@@ -1,17 +1,45 @@
 {
   "network": {
     "wifi": {
-      "ssid": "MY_SSID",
-      "password": "MY_PASSWORD"
+      "ssid": "niot",
+      "password": "gaR2aipo"
     }
   },
   "mqtt": {
     "server": {
-      "host": "192.168.1.1",
+      "host": "172.21.1.1",
       "port": 1883
     },
     "publish": {
       "retain": true
     }
+  },
+  "log": {
+    "host": "172.21.1.1",
+    "port": 5000
+  },
+  "ble": {
+    "whitelist": [ 
+      "a4:c1:38:94:b7:f0", 
+      "a4:c1:38:fa:82:4e", 
+      "a4:c1:38:73:8f:43", 
+      "a4:c1:38:11:37:27" 
+    ],
+    "characteristics": {
+      "definitions": {
+      },
+      "whitelist": [ 
+        "00001f10-0000-1000-8000-00805f9b34fb",  
+        "00002a6e-0000-1000-8000-00805f9b34fb",
+        "00002a6f-0000-1000-8000-00805f9b34fb",
+        "00002a19-0000-1000-8000-00805f9b34fb",
+        "00001a01-0000-1000-8000-00805f9b34fb",
+        "00001a02-0000-1000-8000-00805f9b34fb"
+      ]
+    },
+    "passkeys": {
+      "a4:c1:38:??:??:??": 443012
+    }
   }
 }
+
