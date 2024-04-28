@@ -693,7 +693,7 @@ static broadcaster_ops_t beewi_smart_door_ops = {
 #define ATC1441_TEMP_HUM_SERVICE_UUID 0x181A
 
 typedef struct {
-//    uint16_t not_used;
+    uint16_t not_used;
     uint16_t service_uuid;
     mac_addr_t mac;
     int16_t temp;
@@ -739,7 +739,7 @@ static void atc1441_temp_hum_metadata_get(uint8_t *adv_data,
     atc1441_temp_hum_t *atc1441_data = atc1441_temp_hum_data_get(adv_data,
         adv_data_len, &len);
 
-    cb("MACAddress", mactoa(atc1441_data->mac), ctx);
+    cb("MACAddress", _mactoa(atc1441_data->mac), ctx);
 
     sprintf(s, "%hhu", atc1441_data->message_counter);
     cb("MessageCounter", s, ctx);
